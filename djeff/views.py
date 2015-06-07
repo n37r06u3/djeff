@@ -1,13 +1,30 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from .models import Contact
-
+import logging
+logger = logging.getLogger(__name__)
 
 def hello_world(request):
+    print 'hello'
+    print logger.name
+    logger.info('hello logging')
     return HttpResponse("Hello, World")
 
 
 from django.views.generic import View
 
+class LoginRequiredMixin(object):
+    @classmethod
+    def as_view(cls, **initkwargs):
+        view = super(LoginRequiredMixin, cls).as_view(**initkwargs)
+        return login_required(view)
+
+class LoggingMixin(object):
+    @classmethod
+    def as_view(cls, **initkwargs):
+        logger.info('mixin logging')
+        view = super(LoggingMixin, cls).as_view(**initkwargs)
+        return view
 
 class MyView(View):
     def get(self, request, *args, **kwargs):
@@ -17,7 +34,7 @@ class MyView(View):
 from django.views.generic import ListView
 
 
-class ListContactView(ListView):
+class ListContactView(LoggingMixin, ListView):
     model = Contact
 
 

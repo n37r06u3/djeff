@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_requestlogging',
     'djeff'
 )
 
@@ -49,6 +50,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'django_requestlogging.middleware.LogSetupMiddleware'
 )
 
 ROOT_URLCONF = 'djeff.urls'
@@ -109,6 +111,7 @@ STATICFILES_DIRS = (
 STATIC_ROOT = 'static'
 
 LOGIN_REDIRECT_URL = '/'
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
@@ -119,17 +122,26 @@ LOGGING = {
         'simple': {
             'format': '%(levelname)s %(message)s'
         },
+        'request_format': {
+            'format': '%(remote_addr)s %(username)s "%(request_method)s '
+            '%(path_info)s %(server_protocol)s" %(http_user_agent)s '
+            '%(message)s %(asctime)s',
+        },
     },
     'filters': {
         'require_debug_false': {
             '()': 'django.utils.log.RequireDebugFalse'
-        }
+        },
+        'request': {
+            '()': 'django_requestlogging.logging_filters.RequestFilter',
+        },
     },
     'handlers': {
         'console': {
-            'level': 'ERROR',
+            #'level': 'ERROR',
             'class': 'logging.StreamHandler',
-            'formatter': 'verbose'
+            'formatter': 'request_format',
+            'filters': ['request'],
         },
 
     },
@@ -138,6 +150,10 @@ LOGGING = {
             'handlers': ['console'],
             'level': 'ERROR',
             'propagate': True,
+        },
+        'djeff': {
+            'handlers': ['console'],
+            'level': 'INFO',
         },
     }
 }
