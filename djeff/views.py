@@ -1,14 +1,9 @@
 import logging
 
 from django.http import HttpResponse
-from django.views.generic import UpdateView
-from django.views.generic import View
 from django.core.urlresolvers import reverse
-from django.views.generic import CreateView
-from django.views.generic import ListView
-from django.views.generic import DetailView
+from django.views.generic import (UpdateView, View, CreateView, ListView, DetailView)
 from django.contrib.auth.models import User
-
 from .models import Contact
 from .mixins import LoggedInMixin, LoggingMixin, ContactOwnerMixin
 from .forms import ContactForm, ContactAddressFormSet
