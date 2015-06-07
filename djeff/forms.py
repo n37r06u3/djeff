@@ -12,8 +12,8 @@ class ContactForm(forms.ModelForm):
 
     class Meta:
         model = Contact
-        fields = '__all__'
-
+        #fields = '__all__'
+        exclude = ('owner',)
     def __init__(self, *args, **kwargs):
         #if kwargs.get('instance'):
         #    email = kwargs['instance'].email

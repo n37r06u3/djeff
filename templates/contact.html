@@ -3,6 +3,7 @@
 {% block content %}
 <h1>{{ contact }}</h1>
 <p>Email: {{ contact.email }}</p>
+<p>owner: {{ contact.owner }}</p>
     (<a href="{% url "edit-addresses" pk=contact.id %}">edit addr</a>)
     <ul>
 {% for address in contact.address_set.all %}

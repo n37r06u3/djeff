@@ -111,6 +111,8 @@ STATICFILES_DIRS = (
 STATIC_ROOT = 'static'
 
 LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = 'django.contrib.auth.views.login'
+#LOGOUT_URL = 'django.contrib.auth.views.logout'
 
 LOGGING = {
     'version': 1,
