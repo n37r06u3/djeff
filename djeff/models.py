@@ -12,11 +12,10 @@ class Contact(models.Model):
 
     email = models.EmailField()
 
-
     def get_absolute_url(self):
         return reverse('view', kwargs={'pk': self.id})
 
-    def __str__(self):
+    def __unicode__(self):
 
         return ' '.join([
             self.first_name,
