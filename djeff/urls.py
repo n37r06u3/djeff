@@ -21,8 +21,8 @@ from .views import hello_world, MyView, ListContactView, CreateContactView, \
 from django.views.generic.edit import CreateView
 from django.contrib.auth.forms import UserCreationForm
 urlpatterns = [
-    url(r'^hello$', hello_world, name='home'),
-    url(r'^hello2$', MyView.as_view(), name='home2'),
+    url(r'^hello$', hello_world),
+    url(r'^hello2$', MyView.as_view()),
     url(r'^$', ListContactView.as_view(), name='list'),
     url(r'^create$', CreateContactView.as_view(), name='create'),
     url(r'^edit/(?P<pk>\d+)/$', UpdateContactView.as_view(),
@@ -41,6 +41,6 @@ urlpatterns = [
             template_name='register.html',
             form_class=UserCreationForm,
             success_url='/'
-    )),
+    ), name='register'),
     url('^accounts/', include('django.contrib.auth.urls')),
 ]

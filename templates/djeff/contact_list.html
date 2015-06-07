@@ -5,6 +5,8 @@
 {% block content %}
 <h1>Contacts</h1>
 
+<a href="{% url "create" %}">add contact</a>
+
 <ol>
   {% for contact in object_list %}
     <li class="contact">
@@ -17,7 +19,9 @@
 </ol>
 
 
-<img height="300" src="{% static 'qr.png' %}" />
 
-<a href="{% url "create" %}">add contact</a>
+
+
+
+<img height="300" src="{% static 'qr.png' %}" />
 {% endblock %}

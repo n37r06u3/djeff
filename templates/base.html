@@ -6,10 +6,13 @@
   </head>
 
   <body>
+
      <div>
+     <p><a href="{% url 'list' %}">Home</a></p>
       {{ user }}
       {% if user.is_anonymous %}
       <a href="{% url 'django.contrib.auth.views.login' %}">login</a>
+      <a href="{% url 'register' %}">register</a>
       {% else %}
       <a href="{% url 'django.contrib.auth.views.logout' %}">logout</a>
       {% endif %}
