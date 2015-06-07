@@ -21,10 +21,9 @@ class LoginRequiredMixin(object):
 
 class LoggingMixin(object):
     @classmethod
-    def as_view(cls, **initkwargs):
-        logger.info('mixin logging')
-        view = super(LoggingMixin, cls).as_view(**initkwargs)
-        return view
+    def get(self, request, *args, **kwargs):
+        logger.info('logging from mixin')
+        return super(LoggingMixin, self).get(request, *args, **kwargs)
 
 class MyView(View):
     def get(self, request, *args, **kwargs):
