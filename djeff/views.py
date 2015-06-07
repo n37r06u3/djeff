@@ -33,11 +33,14 @@ class MyView(View):
 
 from django.views.generic import ListView
 
-
+from django.contrib.auth.models import User
 class ListContactView(LoggingMixin, ListView):
     model = Contact
 
-
+    def get_context_data(self, **kwargs):
+        context = super(ListContactView, self).get_context_data(**kwargs)
+        context['user_count'] = User.objects.count()
+        return context
 from django.core.urlresolvers import reverse
 from django.views.generic import CreateView
 from .forms import ContactForm, ContactAddressFormSet
