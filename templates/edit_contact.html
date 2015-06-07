@@ -1,0 +1,20 @@
+{% if contact.id %}
+<h1>Edit Contact</h1>
+{% else %}
+<h1>Add Contact</h1>
+{% endif %}
+
+{% if contact.id %}
+<a href="{% url "delete" pk=contact.id %}">Delete</a>
+{% endif %}
+
+
+<form action="{{ action }}" method="POST">
+  {% csrf_token %}
+  <ul>
+    {{ form.as_ul }}
+  </ul>
+  <input id="save_contact" type="submit" value="Save" />
+</form>
+
+<a href="{% url "list" %}">back to list</a>
